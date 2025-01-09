@@ -1,0 +1,3 @@
+Sketch che, dati un sensore HC-SR04 e uno schermo lcd 2x16, permette di visualizzare sull'lcd la distanza di un qualsiasi oggetto tramite il sensore
+
+board: Arduino UNO

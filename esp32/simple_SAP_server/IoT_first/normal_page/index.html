@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Controlli ESP32</title>
+        <style>
+            body {
+                margin: 0 auto;
+                height: 100%;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-align: center;
+            }
+            h1 {
+                font-size: 2.5em;
+                color: #ff5c00;
+                background-color: rgba(255, 176, 130, 0.3);
+            }
+            div.sections {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+            }
+            div.in-section {
+                margin-inline: auto;
+                width: fit-content;
+                border: 5% solid;
+                border-radius: 3em;
+            }
+            div.potentiometer {
+                border-color: blue;
+            }
+            div.leds {
+                border-color: linear-gradient(to bottom right, crimson, orange yellow, aquamarine, blue);
+            }
+            div.motor {
+                border-color: grey;
+            }
+            h2 {
+                font-size: 1.5em;
+                text-align: center;
+            }
+
+            /*valore del potenziometro: barra lineare col valore all'interno*/
+            div.bar { /*contenitore della barra che avanza*/
+                width: 50%;
+                height: 3%;
+                background-color: #bababa;
+                border-radius: 7%;
+            }
+            div.power { /*barra che avanza con l'intensità del segnale*/
+                height: 100%;
+                background-color: #ff5c00;
+                border-radius: 7%;
+                transition: width 0.6s ease-in-out;
+                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            }
+            .potentiometer bits { /*bit mandati*/
+                color: blue;
+                font-weight: bolder;
+            }
+            .potentiometer percentage { /*percentuale mostrata*/
+                color: blue;
+                font-weight: bolder;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <h1>Controlla l'ESP32 con i seguenti comandi</h1>
+
+        <div class="sections">
+
+            <div class="in-section potentiometer">
+                <h2>Valore del potenziometro</h2>
+                <div class="bar">
+                    <div class="power"></div>
+                </div>
+                <span class="percentage"></span>
+            </div>
+
+            <div class="in-section leds">
+                <h2>Accensione dei LED</h2>
+            </div>
+
+            <div class="in-section motor">
+                <h2>Velocità motore elettrico</h2>
+            </div>
+
+        </div>
+
+    </body>
+</html>

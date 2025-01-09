@@ -1,0 +1,2 @@
+bisogna aggiungere un listener nella riga 353 di index.html in VS code, nel codice JS non "ascolta" lo stato dei led
+e quindi non aggiorna lo stato, e quindi non lo mette nel messaggio JSON da inviare all'ESP32

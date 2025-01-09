@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Barra di Caricamento Circolare</title>
+    <style>
+        .circle {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <svg class="circle" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45" fill="none" stroke="#ff5c00" stroke-width="10" stroke-dasharray="0, 282.74" />
+    </svg>
+    <script>
+        const circle = document.querySelector('circle');
+        let progress = 0;
+        const circumference = 2 * Math.PI * 45; // Calcoliamo la circonferenza esatta del cerchio
+
+        function animateCircle() {
+        progress += 10;
+        circle.style.strokeDasharray = `${progress}, ${circumference - progress}`;
+            if (progress <= 100) {
+                setTimeout(animateCircle, 100); // Aggiorna ogni 100ms per un'animazione più fluida
+            }
+        }
+
+        animateCircle();
+    </script>
+</body>
+</html>

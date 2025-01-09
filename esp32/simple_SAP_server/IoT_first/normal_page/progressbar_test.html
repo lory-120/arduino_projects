@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Barra di Caricamento Lineare</title>
+    <style>
+        .progress-bar {
+            width: 200px;
+            height: 20px;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #4CAF50; /* Verde più scuro */
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Ombra leggera */
+        }
+
+        .percent {
+            color: black; /* Testo bianco per contrasto */
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+    <div class="percent">0%</div>
+
+    <script>
+        const progressBar = document.querySelector('.progress');
+        const percentDisplay = document.querySelector('.percent');
+        let progress = 0;
+
+        function animateProgressBar() {
+            progress += 10;
+            progressBar.style.width = progress + '%';
+            percentDisplay.textContent = progress + '%';
+
+            if (progress < 100) {
+                setTimeout(animateProgressBar, 1000);
+            }
+        }
+
+        animateProgressBar();
+    </script>
+</body>
+</html>
