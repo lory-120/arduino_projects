@@ -54,8 +54,8 @@ void loop() {
 
 //funzione di callback per la ricezione dei dati
 /*
-  Quando si ricevono dei dati, si hanno i seguenti dati:
-  - recv_info: struct contenente source e destination address
+  Quando si ricevono dei dati, si hanno i seguenti parametri nella funzione di ricezione:
+  - recv_info: struct contenente source e destination MAC address
   - data: dati raw da interpretare. Possono essere char, int, double ecc.
   - len: n° di byte ricevuti
 */

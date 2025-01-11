@@ -3,13 +3,13 @@
 #include <esp_now.h> //libreria fondamentale per ESP-NOW
 
 // Indirizzo MAC dello slave (sostituisci con quello reale)
-//uint8_t slave_mac[] = {0x64, 0xE8, 0x33, 0x84, 0x4E, 0x08}; //(è quello del mio seeed studio xiao esp32c3)
+//uint8_t slave_mac[] = {0x64, 0xE8, 0x33, 0x84, 0x4E, 0x08}; //(è quello del mio seeed studio xiao esp32c3 personale)
 //uint8_t slave_mac[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; //(da modificare)
 
 // Canale ESP-NOW
 const uint8_t CHANNEL = 0;  // Puoi cambiare il canale se necessario
 
-//dati dello slave (che è un peer), salvati in una struct. Fa parte della libreria
+//dati dello slave (che è un peer), salvati in una struct. Fa parte della libreria esp_now
 esp_now_peer_info_t slave;
 
 void setup() {
@@ -26,9 +26,9 @@ void setup() {
   Serial.print(F("Ricerca slave. Attendere prego."));
   do {
     Serial.print(F("."));
-  } while(!scanForSlave());
+  } while(!scanForSlave()); //funzione scanForSlave per connettersi al primo che trova, se non è uno specifico
   Serial.println(F("Slave trovato. Registro lo slave."));
-  esp_now_add_peer(&slave);
+  esp_now_add_peer(&slave); //bisogna passare per riferimento, non per valore
   Serial.println(F("Slave registrato."));
 
   //SE SI HA L'INDIRIZZO MAC DEL DESTINATARIO, TOGLIERE QUESTO CODICE DAI COMMENTI E METTERE L'ALTRA PORZIONE TRA COMMENTI
@@ -58,7 +58,7 @@ void loop() {
 
   Serial.println((result == ESP_OK) ? F("Messaggio inviato con successo") : F("Errore nell'invio del messaggio")); //stampa esito
 
-  if(Serial.available() > 0) {
+  if(Serial.available() > 0) { //se c'è qualcosa di nuovo nella porta seriale...
     //Leggi i dati dalla porta seriale e li salva in una stringa
     String command = Serial.readStringUntil('\n');
 
@@ -81,26 +81,26 @@ void loop() {
 
 //(codice assolutamente non copiato e incollato lol)
 bool scanForSlave() {
-  Serial.println(F("Scansiono reti..."));
+  //Serial.println(F("Scansiono reti..."));
   int8_t scanResults = WiFi.scanNetworks(); //cerca reti wifi
-  Serial.println(F("Scansione completata."));
+  //Serial.println(F("Scansione completata."));
 
   for(int i=0; i<scanResults; ++i) { //itera in tutte le reti trovate
     //salva SSID e BSSID in due stinghe, che è l'indirizzo mac del punto specifico wifi
     String SSID = WiFi.SSID(i);
     String BSSIDstr = WiFi.BSSIDstr(i);
 
-    Serial.print(String(i)); Serial.print("rete: "); Serial.print(SSID); Serial.print(" | "); Serial.println(BSSIDstr); //per debug
+    //Serial.print(String(i)); Serial.print("rete: "); Serial.print(SSID); Serial.print(" | "); Serial.println(BSSIDstr); //per debug
 
     //si dà prescontato che tutti gli slave iniziano con "RX"
     if(SSID.indexOf("RX") == 0) {
-      Serial.print("SSID: "); Serial.println(SSID);
-      Serial.print("BSSID: "); Serial.println(BSSIDstr);
+      //Serial.print("SSID: "); Serial.println(SSID);
+      //Serial.print("BSSID: "); Serial.println(BSSIDstr);
 
       int mac[6]; //array di int per immagazzinare il mac dello slave trovato
       if(6 == sscanf(BSSIDstr.c_str(), "%x:%x:%x:%x:%x:%x", &mac[0], &mac[1], &mac[2], &mac[3], &mac[4], &mac[5])) { //"se la formattazione del mac è corretta..."
         for(int j=0; j<6; ++j) { //aggiungi lo slave, inserendo il suo indirizzo mac nella variabile globale
-          slave.peer_addr[j] = (uint8_t)mac[j];
+          slave.peer_addr[j] = (uint8_t)mac[j]; //fa il casting da int a uint8_t (unsigned int di 8 bit)
         }
       }
 
