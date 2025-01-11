@@ -6,14 +6,15 @@
 #include <Arduino.h>
 
 class KY_023 {
-  public:
+  private:
     //attributi
     //pin dell'asse X e Y del joystick e del pulsante, frequenza e risoluzione
     int Xpin, Ypin, buttonPress;
     //valori dell'asse X e Y e del bottone
     int x, y;
     bool isPressed;
-    
+
+  public:    
     //metodo costruttore
     KY_023(int Xpin, int Ypin, int buttonPress) {
       this->Xpin = Xpin;
@@ -36,17 +37,9 @@ class KY_023 {
     }
     bool isButtonPressed() {
       int buttonVal = analogRead(buttonPress);
-      
-      if(buttonVal == 0) {
-        this->isPressed = true;
-      } else {
-        this->isPressed = false;
-      }
 
-      if(this->isPressed == true) {
-        return true;
-      } else {
-        return false;
-      }
+      this->isPressed = (buttonVal == 0) ? true : false;
+
+      return (this->isPressed) ? true : false;
     }
 };
