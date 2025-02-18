@@ -9,7 +9,7 @@ void setup() { //eseguita solo una volta, a meno che non sia richiamata nel loop
 }
 
 void loop() { //eseguita all'infinito, fino a quando non si spegne la scheda o c'è un errore fatale
-  bool pinState = digitalRead(inputPin) //leggi lo stato dal pin di input
+  bool pinState = digitalRead(inputPin); //leggi lo stato dal pin di input
   if(pinState == HIGH) { //se lo stato è HIGH:
     digitalWrite(outputPin, HIGH); //imposta lo stato del pin di output a HIGH (= acceso)
     Serial.print("Pulsante nel GPIO ");
